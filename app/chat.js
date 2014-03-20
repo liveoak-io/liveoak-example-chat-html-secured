@@ -6,13 +6,12 @@ $( function() {
       port: 8080,
       auth: {
         clientId: 'chat-secured',
-        realm: 'chat-secured',
-        onload: 'login-required'
+        realm: 'chat-secured'
       }
     }
   );
 
-  liveoak.auth.init(authCallback, function(data) {
+  liveoak.auth.init('login-required').success(authCallback).error(function(data) {
     alert( "authentication failed: " + data.error );
   });
 
@@ -25,8 +24,9 @@ $( function() {
   }
 
   function authCallback() {
+    $('body').css('display', 'block');
     $( '#user-info' ).html( "Logged in as: " + liveoak.auth.idToken.preferred_username );
-    liveoak.connect( "Bearer", window.oauth.token, function() {
+    liveoak.connect( "Bearer", liveoak.auth.token, function() {
       liveoak.create( '/chat-secured/storage', { id: 'chat' }, {
         success: function(data) {
 
