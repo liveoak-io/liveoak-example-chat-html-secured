@@ -1,0 +1,8 @@
+{
+    "policies": [
+        {
+            "policyName" : "URIPolicy",
+            "policyResourceEndpoint": "/chat-secured/uriPolicy/authzCheck"
+        }
+    ]
+}

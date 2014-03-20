@@ -1,0 +1,86 @@
+{
+    "realm": "chat-secured",
+    "enabled": true,
+    "sslNotRequired": true,
+    "registrationAllowed": true,
+    "resetPasswordAllowed": true,
+    "requiredCredentials": [ "password" ],
+
+    "users" : [
+        {
+            "username" : "bob",
+            "enabled": true,
+            "credentials" : [
+                { "type" : "password",
+                  "value" : "password" }
+            ]
+        },
+        {
+            "username" : "john",
+            "enabled": true,
+            "credentials" : [
+                { "type" : "password",
+                  "value" : "password" }
+            ]
+        },
+        {
+            "username" : "mary",
+            "enabled": true,
+            "credentials" : [
+                { "type" : "password",
+                  "value" : "password" }
+            ]
+        }
+    ],
+
+    "roles": {
+        "application" : {
+            "chat-secured" : [
+                {
+                    "name": "user",
+                    "description": "Have User privileges for Chat"
+                },
+                {
+                    "name": "admin",
+                    "description": "Have Admin privileges for Chat"
+                }
+            ]
+        }
+    },
+
+    "applications": [
+        {
+            "name": "chat-secured",
+            "enabled": true,
+            "baseUrl": "http://localhost:8080/chat-secured/",
+            "redirectUris": [ "http://localhost:8080/chat-secured/*" ],
+            "webOrigins": [ "http://localhost:8080" ],
+            "publicClient": true,
+            "defaultRoles": [ "user" ],
+            "claims": { "name": true, "username": true, "email": true }
+        }
+    ],
+
+    "applicationRoleMappings": {
+        "chat-secured": [
+            {
+                "username": "bob",
+                "roles": [ "user", "admin" ]
+            },
+            {
+                "username": "john",
+                "roles": [ "user" ]
+            }
+        ],
+        "account": [
+            {
+                "username": "bob",
+                "roles": [ "view-profile", "manage-account" ]
+            },
+            {
+                "username": "john",
+                "roles": [ "view-profile", "manage-account" ]
+            }
+        ]
+    }
+}

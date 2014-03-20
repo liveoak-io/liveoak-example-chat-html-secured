@@ -1,0 +1,39 @@
+{
+  html-app: '/app/index.html',
+  resources: {
+    app: {
+      type: 'filesystem',
+      config: {
+        directory: "${application.dir}/app/"
+      }
+    },
+
+    client: {
+      type: 'aggregating-filesystem',
+      config: {
+        directory: "${io.liveoak.js.dir}"
+      }
+    },
+
+    storage: {
+      type: 'mongo',
+      config: {
+        db: 'chat-demo',
+        host: 'localhost',
+        port: 27017
+      }
+    },
+
+    auth: {
+      type: 'keycloak'
+    },
+
+    authz: {
+      type: 'security'
+    },
+
+    uriPolicy: {
+      type: 'uriPolicy'
+    }
+  }
+}
