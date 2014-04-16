@@ -2,7 +2,7 @@
     "policies": [
         {
             "policyName" : "URIPolicy",
-            "policyResourceEndpoint": "/chat-secured/uriPolicy/authzCheck"
+            "policyResourceEndpoint": "/chat-html-secured/uriPolicy/authzCheck"
         }
     ]
 }

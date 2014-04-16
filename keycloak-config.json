@@ -1,5 +1,5 @@
 {
-    "realm": "chat-secured",
+    "realm": "chat-html-secured",
     "enabled": true,
     "sslNotRequired": true,
     "registrationAllowed": true,
@@ -35,7 +35,7 @@
 
     "roles": {
         "application" : {
-            "chat-secured" : [
+            "chat-html-secured" : [
                 {
                     "name": "user",
                     "description": "Have User privileges for Chat"
@@ -50,10 +50,10 @@
 
     "applications": [
         {
-            "name": "chat-secured",
+            "name": "chat-html-secured",
             "enabled": true,
-            "baseUrl": "http://localhost:8080/chat-secured/",
-            "redirectUris": [ "http://localhost:8080/chat-secured/*" ],
+            "baseUrl": "http://localhost:8080/chat-html-secured/",
+            "redirectUris": [ "http://localhost:8080/chat-html-secured/*" ],
             "webOrigins": [ "http://localhost:8080" ],
             "publicClient": true,
             "defaultRoles": [ "user" ],
@@ -62,7 +62,7 @@
     ],
 
     "applicationRoleMappings": {
-        "chat-secured": [
+        "chat-html-secured": [
             {
                 "username": "bob",
                 "roles": [ "user", "admin" ]

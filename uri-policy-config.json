@@ -2,45 +2,45 @@
     "uriRules": [
         {
             "priority": 1,
-            "uriPattern": "/chat-secured",
+            "uriPattern": "/chat-html-secured",
             "requestType": "READ",
             "allowedUsers": "'*'"
         },
         {
             "priority": 1,
-            "uriPattern": "/chat-secured/app*",
+            "uriPattern": "/chat-html-secured/app*",
             "requestType": "READ",
             "allowedUsers": "'*'"
         },
         {
             "priority": 1,
-            "uriPattern": "/chat-secured/client*",
+            "uriPattern": "/chat-html-secured/client*",
             "requestType": "*",
             "allowedUsers": "'*'"
         },
         {
             "priority": 2,
-            "uriPattern": "/chat-secured/storage*",
+            "uriPattern": "/chat-html-secured/storage*",
             "requestType": "*",
-            "allowedRoles": "'chat-secured/admin'"
+            "allowedRoles": "'chat-html-secured/admin'"
         },
         {
             "priority": 1,
-            "uriPattern": "/chat-secured/storage/chat",
+            "uriPattern": "/chat-html-secured/storage/chat",
             "requestType": "UPDATE",
             "allowedUsers": "'*'"
         },
         {
             "priority": 1,
-            "uriPattern": "/chat-secured/storage*",
+            "uriPattern": "/chat-html-secured/storage*",
             "requestType": "CREATE,UPDATE,READ",
-            "allowedRoles": "'chat-secured/user'"
+            "allowedRoles": "'chat-html-secured/user'"
         },
         {
             "priority": 1,
-            "uriPattern": "/chat-secured/storage/chat/*",
+            "uriPattern": "/chat-html-secured/storage/chat/*",
             "requestType": "READ",
-            "queryParamsCondition": "$requestState.getProperty('text') != null && $requestState.getProperty('text').toString().startsWith('secret:')",
+            "queryParamsCondition": "$responseState.getProperty('text') != null && $requestState.getProperty('text').toString().startsWith('secret:')",
             "deniedUsers": "'*'"
         }
     ]
