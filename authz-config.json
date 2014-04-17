@@ -1,8 +1,8 @@
 {
     "policies": [
         {
-            "policyName" : "URIPolicy",
-            "policyResourceEndpoint": "/chat-html-secured/uriPolicy/authzCheck"
+            "policyName" : "DroolsPolicy",
+            "policyResourceEndpoint": "/chat-html-secured/drools-policy/authzCheck"
         }
     ]
 }

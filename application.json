@@ -36,8 +36,55 @@
       type: 'security'
     },
 
-    uriPolicy: {
-      type: 'uriPolicy'
+    drools-policy: {
+      type: 'drools-policy',
+      config: {
+        "rules": [
+          {
+            "priority": 1,
+            "uriPattern": "/chat-html-secured",
+            "requestType": "READ",
+            "allowedUsers": "'*'"
+          },
+          {
+            "priority": 1,
+            "uriPattern": "/chat-html-secured/app*",
+            "requestType": "READ",
+            "allowedUsers": "'*'"
+          },
+          {
+            "priority": 1,
+            "uriPattern": "/chat-html-secured/client*",
+            "requestType": "*",
+            "allowedUsers": "'*'"
+          },
+          {
+            "priority": 2,
+            "uriPattern": "/chat-html-secured/storage*",
+            "requestType": "*",
+            "allowedRoles": "'chat-html-secured/admin'"
+          },
+          {
+            "priority": 1,
+            "uriPattern": "/chat-html-secured/storage/chat",
+            "requestType": "UPDATE",
+            "allowedUsers": "'*'"
+          },
+          {
+            "priority": 1,
+            "uriPattern": "/chat-html-secured/storage*",
+            "requestType": "CREATE,UPDATE,READ",
+            "allowedRoles": "'chat-html-secured/user'"
+          },
+          {
+            "priority": 1,
+            "uriPattern": "/chat-html-secured/storage/chat/*",
+            "requestType": "READ",
+            "conditions": "$responseState.getProperty('text') != null && $requestState.getProperty('text').toString().startsWith('secret:')",
+            "deniedUsers": "'*'"
+          }
+        ]
+      }
     }
   }
 }
