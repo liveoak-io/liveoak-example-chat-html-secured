@@ -6,7 +6,7 @@ $( function() {
       port: 8080,
       auth: {
         clientId: 'chat-html-secured',
-        realm: 'chat-html-secured'
+        realm: 'liveoak-apps'
       }
     }
   );
