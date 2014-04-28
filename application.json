@@ -33,55 +33,67 @@
     },
 
     authz: {
-      type: 'security'
+      type: 'security',
+      config: {
+        policies: [
+          {
+            policyName: "URIPolicy",
+            policyResourceEndpoint: "/chat-html-secured/uri-policy/authzCheck"
+          },
+          {
+            policyName: "ACLPolicy",
+            policyResourceEndpoint: "/chat-html-secured/acl-policy/authzCheck",
+            includedResourcePrefixes: [ "/chat-html-secured/storage" ]
+          }
+        ]
+      }
     },
 
-    drools-policy: {
-      type: 'drools-policy',
+    acl-policy: {
+      type: 'acl-policy',
       config: {
-        "rules": [
+        autoRules: [
           {
-            "priority": 1,
-            "uriPattern": "/chat-html-secured",
-            "requestType": "READ",
-            "allowedUsers": "'*'"
+            resourcePath: "/chat-html-secured/storage/chat",
+            autoAddedOwnerPermissions: [ "DELETE" ]
+          }
+        ]
+      }
+    },
+
+    uri-policy: {
+      type: 'uri-policy',
+      config: {
+        rules: [
+          {
+            uriPattern: "/chat-html-secured",
+            requestTypes: [ "READ" ],
+            allowedUsers: [ "*" ]
           },
           {
-            "priority": 1,
-            "uriPattern": "/chat-html-secured/app*",
-            "requestType": "READ",
-            "allowedUsers": "'*'"
+            uriPattern: "/chat-html-secured/app*",
+            requestTypes: [ "READ" ],
+            allowedUsers: [ "*" ]
           },
           {
-            "priority": 1,
-            "uriPattern": "/chat-html-secured/client*",
-            "requestType": "*",
-            "allowedUsers": "'*'"
+            uriPattern: "/chat-html-secured/client*",
+            requestTypes: [ "*" ],
+            allowedUsers: [ "*" ]
           },
           {
-            "priority": 2,
-            "uriPattern": "/chat-html-secured/storage*",
-            "requestType": "*",
-            "allowedRoles": "'chat-html-secured/admin'"
+            uriPattern: "/chat-html-secured/storage*",
+            requestTypes: [ "*" ],
+            allowedRoles: [ "chat-html-secured/admin" ]
           },
           {
-            "priority": 1,
-            "uriPattern": "/chat-html-secured/storage/chat",
-            "requestType": "UPDATE",
-            "allowedUsers": "'*'"
+            uriPattern: "/chat-html-secured/storage/chat*",
+            requestTypes: [ "READ" ],
+            allowedRoles: [ "chat-html-secured/user" ]
           },
           {
-            "priority": 1,
-            "uriPattern": "/chat-html-secured/storage*",
-            "requestType": "CREATE,UPDATE,READ",
-            "allowedRoles": "'chat-html-secured/user'"
-          },
-          {
-            "priority": 1,
-            "uriPattern": "/chat-html-secured/storage/chat/*",
-            "requestType": "READ",
-            "conditions": "$responseState.getProperty('text') != null && $requestState.getProperty('text').toString().startsWith('secret:')",
-            "deniedUsers": "'*'"
+            uriPattern: "/chat-html-secured/storage/chat",
+            requestTypes: [ "CREATE" ],
+            allowedRoles: [ "chat-html-secured/user" ]
           }
         ]
       }
