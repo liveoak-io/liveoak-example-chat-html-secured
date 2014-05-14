@@ -15,6 +15,10 @@ Steps to run the application
 	$ cp -r _liveoak examples_/chat-html-secured _liveoak_/apps
 	$ sh _liveoak_/bin/standalone.sh
 
+* Add the application in keycloak (Manual step currently required)
+ 	Go to http://localhost:8080/auth/admin/index.html#/realms/liveoak-apps/applications
+	Add Application > "chat-html-secured", client-type: bearer-only > Save
+
 * Open your browser at http://localhost:8080/chat-html-secured
 
 Users
