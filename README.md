@@ -15,6 +15,7 @@ Steps to run the application
 * Copy the example in the _apps_ directory and start Liveoak
 
 	$ cp -r _liveoak examples_/chat-html-secured _liveoak_/apps
+	
 	$ sh _liveoak_/bin/standalone.sh
 
 * Add the application in keycloak (Manual step currently required)
