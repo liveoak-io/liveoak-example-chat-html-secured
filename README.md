@@ -21,10 +21,11 @@ Steps to run the application
 * Add the application in keycloak (Manual step currently required)
 
  * Go to http://localhost:8080/auth/admin/index.html#/realms/liveoak-apps/applications
- * Add Application
+ * Add Application (or edit application "chat-html-secured" if it already exists)
    * Name: "chat-html-secured"
    * client-type: "public"
    * Redirect URI: "http://localhost:8080/chat-html-secured/*" (click button "Add") 
+   * Base URL: "http://localhost:8080/chat-html-secured"
    * Admin URL: "http://localhost:8080/chat-html-secured"
    * Web Origins: "http://localhost:8080" (click button "Add")
  * Finally click "Save"
