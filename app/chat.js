@@ -2,10 +2,10 @@
 
 $( function() {
   var liveoak = new LiveOak( {
-      host: "localhost",
-      port: 8080,
+      host: document.location.hostname,
+      port: document.location.port,
       auth: {
-        clientId: 'chat-html-secured',
+        clientId: 'chat-html-secured-client',
         realm: 'liveoak-apps'
       }
     }
