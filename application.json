@@ -66,34 +66,24 @@
       config: {
         rules: [
           {
-            uriPattern: "/chat-html-secured",
-            requestTypes: [ "READ" ],
-            allowedUsers: [ "*" ]
-          },
-          {
-            uriPattern: "/chat-html-secured/app*",
-            requestTypes: [ "READ" ],
-            allowedUsers: [ "*" ]
-          },
-          {
-            uriPattern: "/chat-html-secured/client*",
+            uriPattern: "*",
             requestTypes: [ "*" ],
             allowedUsers: [ "*" ]
-          },
-          {
-            uriPattern: "/chat-html-secured/storage*",
-            requestTypes: [ "*" ],
-            allowedRoles: [ "chat-html-secured/admin" ]
-          },
-          {
-            uriPattern: "/chat-html-secured/storage/chat*",
-            requestTypes: [ "READ" ],
-            allowedRoles: [ "chat-html-secured/user" ]
           },
           {
             uriPattern: "/chat-html-secured/storage/chat",
-            requestTypes: [ "CREATE" ],
-            allowedRoles: [ "chat-html-secured/user" ]
+            requestTypes: [ "CREATE", "READ" ],
+            allowedRoles: [ "chat-html-secured/admin", "chat-html-secured/user" ]
+          },
+          {
+            uriPattern: "/chat-html-secured/storage/chat/*",
+            requestTypes: [ "READ" ],
+            allowedRoles: [ "chat-html-secured/user", "chat-html-secured/admin" ]
+          },
+          {
+            uriPattern: "/chat-html-secured/storage/chat/*",
+            requestTypes: [ "UPDATE", "DELETE" ],
+            allowedRoles: [ "chat-html-secured/admin" ]
           }
         ]
       }
