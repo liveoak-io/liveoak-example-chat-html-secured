@@ -10,13 +10,20 @@ Features
 
 * Users with role _admin_ can delete any chat message. So administrator is allowed to censor everything. Normal users can delete just their own messages.
 
-Steps to run the application
+Installing the application
 ----------------------------
-* Copy the example in the _apps_ directory and start Liveoak
+Assumption is that:
+* $LIVEOAK points to directory with your Liveoak server
+* $LIVEOAK_EXAMPLES points to directory with Liveoak examples
 
-	$ cp -r _liveoak-examples_/chat/chat-html-secured _liveoak_/apps
-	
-	$ sh _liveoak_/bin/standalone.sh
+So then copy the example in the _apps_ directory of your Liveoak server and start the server
+```shell
+$ cp -r $LIVEOAK_EXAMPLES/chat/chat-html-secured $LIVEOAK/apps
+$ sh $LIVEOAK/bin/standalone.sh
+````
+
+Setup the application
+---------------------
 
 * Create roles for your application (Manual step required).
   * Go to [http://localhost:8080/admin](http://localhost:8080/admin) and login as user "admin" with password "admin".
@@ -34,7 +41,8 @@ Steps to run the application
     * Scope: select both "admin" and "user" scopes (if you can't add scopes for the first time, let's create client without scopes and then edit it later and add scopes)
   * Finally click "Save"
 
-* Create some default users for testing purposes (their names and default passwords are not important, feel free to use different names):
+* Create some default users for testing purposes (their names and default passwords are not important, feel free to use different names). This step is not mandatory as you can automatically register users later on the login screen of the application.
+But it's useful as self-registered users always have just default roles (in our case role "user"), so you can't test all the authorization possibilities when all users have just same role "user" .
   * Go to Keycloak admin console at [http://localhost:8080/auth/admin/liveoak-admin/console/index.html#/realms/liveoak-apps/users](http://localhost:8080/auth/admin/liveoak-admin/console/index.html#/realms/liveoak-apps/users)
   * Add User > username: "bob" > Save
   * Then open [http://localhost:8080/auth/admin/liveoak-admin/console/index.html#/realms/liveoak-apps/users/bob/user-credentials](http://localhost:8080/auth/admin/liveoak-admin/console/index.html#/realms/liveoak-apps/users/bob/user-credentials) and fill some initial password for user "bob". Note that bob will need to change this default password when he try to login for the first time.
@@ -42,16 +50,21 @@ Steps to run the application
   * Repeat the steps and create another user "john", but assign him just to role "user"
   * Repeat the steps again and create last user "mary" and don't assign her to any role
 
+* Create new collection in MongoDB (Manual step currently required)
+  * Go to [http://localhost:8080/admin#/applications/chat-html-secured/storage/storage/browse](http://localhost:8080/admin#/applications/chat-html-secured/storage/storage/browse)
+  * Click "New collection" > Fill collection name "chat" (name is important as it's used by the application) > Click "Add"
+  * This step is not mandatory because in case that you first login as some admin user (in our case user "bob"), collection will be automatically created during first access to application. But in case that you're using just self-registered users, it will be needed.
+
 * Open your browser at [http://localhost:8080/chat-html-secured](http://localhost:8080/chat-html-secured)
 
-Users
------
-- User 'bob' with password 'password' is admin and can do anything (subscribe, create new chat messages, view all messages received from subscription, delete any message). He is admin and so he is allowed to censor/delete any message created by any user.
+Running the application
+-----------------------
 
-- User 'mary' with password 'password' doesn't have any roles and she can't do anything (view existing messages, create new messages, subscribe to receive messages). She will receive authz error directly
- when you login because she is not authorized to subscribe.
-
-- User 'john' with password 'password' is normal user. He can view existing messages, create new messages and subscribe to receive messages. But he is not authorized
+* Open your browser at [http://localhost:8080/chat-html-secured](http://localhost:8080/chat-html-secured)
+* User 'bob' with password 'password' is admin and can do anything (subscribe, create new chat messages, view all messages received from subscription, delete any message). He is admin and so he is allowed to censor/delete any message created by any user.
+* User 'mary' with password 'password' doesn't have any roles and she can't do anything (view existing messages, create new messages, subscribe to receive messages). She will receive authz error directly
+when you login because she is not authorized to subscribe.
+* User 'john' with password 'password' is normal user. He can view existing messages, create new messages and subscribe to receive messages. But he is not authorized
 to delete chat messages, which were not created by himself. Basically members of role 'user' can delete just their own messages.
 
 
