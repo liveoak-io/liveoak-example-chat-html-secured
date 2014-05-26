@@ -72,6 +72,11 @@
           },
           {
             uriPattern: "/chat-html-secured/storage/chat",
+            requestTypes: [ "UPDATE" ],
+            allowedRoles: [ "chat-html-secured/admin" ]
+          },
+          {
+            uriPattern: "/chat-html-secured/storage/chat",
             requestTypes: [ "CREATE", "READ" ],
             allowedRoles: [ "chat-html-secured/admin", "chat-html-secured/user" ]
           },
