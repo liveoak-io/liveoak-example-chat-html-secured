@@ -11,7 +11,7 @@ $( function() {
     }
   );
 
-  liveoak.auth.init('login-required').success(authCallback).error(function(data) {
+  liveoak.auth.init({ onLoad: 'login-required' }).success(authCallback).error(function(data) {
     alert( "authentication failed: " + data.error );
   });
 
