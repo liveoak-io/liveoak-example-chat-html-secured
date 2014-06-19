@@ -33,8 +33,8 @@ $( function() {
 
   function update_message(data) {
     var msg = $( '#' + get_id( data ) );
-    msg.find( $('.name')[0] ).html( data.name );
-    msg.find( $('.name')[1] ).html( data.text );
+    msg.find( $('.name') )[0].textContent = data.name ;
+    msg.find( $('.name') )[1].textContent = data.text ;
   }
 
   function trigger_remove_message(msgId) {
