@@ -87,9 +87,9 @@ $( function() {
         }
       });
 
-      liveoak.read( '/chat-html-secured/storage/chat?expand=members', {
+      liveoak.read( '/chat-html-secured/storage/chat?fields=*(*)', {
         success: function(data) {
-          $(data._members).each( function(i, e) {
+          $(data.members).each( function(i, e) {
             add_message( e );
           } );
         }
