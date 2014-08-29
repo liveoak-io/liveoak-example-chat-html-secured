@@ -6,7 +6,7 @@ Features
 
 * Stomp over websockets used for subscription requests. Subscription requests allowed just for authorized users (members of role 'admin' or role 'user').
 
-* Authorized subscription responses received for newly added chat messages and also for deleted or updated messages. Update of messages is not provided by this example, but is possible through Liveoak admin console.
+* Authorized subscription responses received for newly added chat messages and also for deleted or updated messages. Update of messages is not provided by this example, but is possible through LiveOak admin console.
 
 * Users with role _admin_ can delete any chat message. So administrator is allowed to censor everything. Normal users can delete just their own messages.
 
@@ -23,10 +23,10 @@ There are two ways that this example may be installed.
 ### Manually:
 
 Assumption is that:
-* $LIVEOAK points to the directory with your Liveoak server
-* $LIVEOAK_EXAMPLES points to the directory with Liveoak examples
+* $LIVEOAK points to the directory with your LiveOak server
+* $LIVEOAK_EXAMPLES points to the directory with LiveOak examples
 
-So then copy the example into the _apps_ directory of your Liveoak server and start the server
+So then copy the example into the _apps_ directory of your LiveOak server and start the server
 ```shell
 $ cp -r $LIVEOAK_EXAMPLES/chat/chat-html-secured $LIVEOAK/apps
 $ sh $LIVEOAK/bin/standalone.sh
