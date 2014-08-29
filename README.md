@@ -12,11 +12,21 @@ Features
 
 Installing the application
 ----------------------------
-Assumption is that:
-* $LIVEOAK points to directory with your Liveoak server
-* $LIVEOAK_EXAMPLES points to directory with Liveoak examples
 
-So then copy the example in the _apps_ directory of your Liveoak server and start the server
+There are two ways that this example may be installed.
+
+### Admin Console:
+
+1. Click "Install Example Application" button, or "Try example applications" link from "Applications" page if you already have applications installed.
+2. Click the "Secured Chat" example and then click "Install".
+
+### Manually:
+
+Assumption is that:
+* $LIVEOAK points to the directory with your Liveoak server
+* $LIVEOAK_EXAMPLES points to the directory with Liveoak examples
+
+So then copy the example into the _apps_ directory of your Liveoak server and start the server
 ```shell
 $ cp -r $LIVEOAK_EXAMPLES/chat/chat-html-secured $LIVEOAK/apps
 $ sh $LIVEOAK/bin/standalone.sh
@@ -27,7 +37,7 @@ Setup the application
 
 * Create roles for your application (Manual step required).
   * Go to [http://localhost:8080/admin](http://localhost:8080/admin) and login as user "admin" with password "admin".
-  * Go to [http://localhost:8080/admin#/applications/chat-html-secured/application-settings](http://localhost:8080/admin#/applications/chat-html-secured/application-settings) and add 2 new roles "admin" and "user". Then you can also select "user" to be default role > Click "Save".
+  * Go to [http://localhost:8080/admin#/applications/chat-html-secured/security/roles](http://localhost:8080/admin#/applications/chat-html-secured/security/roles) and add 2 new roles "admin" and "user". Then you can also select "user" to be the default role.
   * Role names are important, because authorization is configured to deal with those 2 roles.
 
 * Add HTML client for newly created application (Manual step currently required)
@@ -35,18 +45,20 @@ Setup the application
   * Go to [http://localhost:8080/admin#/applications/chat-html-secured/application-clients](http://localhost:8080/admin#/applications/chat-html-secured/application-clients)
   * Add Client
     * Name: "chat-html-secured-client"
-    * Platform: HTML-5
-    * Redirect URI: "http://localhost:8080/chat-html-secured/*" (click button "Add")
-    * Web Origins: "http://localhost:8080" (click button "Add")
-    * Scope: select both "admin" and "user" scopes (if you can't add scopes for the first time, let's create client without scopes and then edit it later and add scopes)
-  * Finally click "Save"
+    * Platform: HTML5
+    * Redirect URI: "http://localhost:8080/chat-html-secured/*"
+    * Web Origins: "http://localhost:8080"
+    * Scope: select both "admin" and "user" scopes
+    * Finally click "Save"
 
 * Create some default users for testing purposes (their names and default passwords are not important, feel free to use different names). This step is not mandatory as you can automatically register users later on the login screen of the application.
 But it's useful as self-registered users always have just default roles (in our case role "user"), so you can't test all the authorization possibilities when all users have just same role "user" .
-  * Go to Keycloak admin console at [http://localhost:8080/auth/admin/liveoak-admin/console/index.html#/realms/liveoak-apps/users](http://localhost:8080/auth/admin/liveoak-admin/console/index.html#/realms/liveoak-apps/users)
-  * Add User > username: "bob" > Save
-  * Then open [http://localhost:8080/auth/admin/liveoak-admin/console/index.html#/realms/liveoak-apps/users/bob/user-credentials](http://localhost:8080/auth/admin/liveoak-admin/console/index.html#/realms/liveoak-apps/users/bob/user-credentials) and fill some initial password for user "bob". Note that bob will need to change this default password when he try to login for the first time.
-  * Then open [http://localhost:8080/auth/admin/liveoak-admin/console/index.html#/realms/liveoak-apps/users/bob/role-mappings](http://localhost:8080/auth/admin/liveoak-admin/console/index.html#/realms/liveoak-apps/users/bob/role-mappings) and select application "chat-html-secured" and move both available roles "admin" and "user" to the assigned roles. This means that bob will be both "admin" and "user" .
+  * Go to http://localhost:8080/admin#/applications/chat-html-secured/security/users
+  * New User
+    * username: "bob"
+    * password: "bob"
+    * roles: select both "admin" and "user"
+    * Click "Save"
   * Repeat the steps and create another user "john", but assign him just to role "user"
   * Repeat the steps again and create last user "mary" and don't assign her to any role
 
@@ -61,10 +73,8 @@ Running the application
 -----------------------
 
 * Open your browser at [http://localhost:8080/chat-html-secured](http://localhost:8080/chat-html-secured)
-* User 'bob' with password 'password' is admin and can do anything (subscribe, create new chat messages, view all messages received from subscription, delete any message). He is admin and so he is allowed to censor/delete any message created by any user.
-* User 'mary' with password 'password' doesn't have any roles and she can't do anything (view existing messages, create new messages, subscribe to receive messages). She will receive authz error directly
+* User 'bob' is admin and can do anything (subscribe, create new chat messages, view all messages received from subscription, delete any message). He is admin and so he is allowed to censor/delete any message created by any user.
+* User 'mary' doesn't have any roles and she can't do anything (view existing messages, create new messages, subscribe to receive messages). She will receive authz error directly
 when you login because she is not authorized to subscribe.
-* User 'john' with password 'password' is normal user. He can view existing messages, create new messages and subscribe to receive messages. But he is not authorized
+* User 'john' is normal user. He can view existing messages, create new messages and subscribe to receive messages. But he is not authorized
 to delete chat messages, which were not created by himself. Basically members of role 'user' can delete just their own messages.
-
-
