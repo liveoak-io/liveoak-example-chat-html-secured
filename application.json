@@ -1,94 +1,94 @@
 {
-  html-app: '/app/index.html',
-  resources: {
-    app: {
-      type: 'filesystem',
-      config: {
-        directory: "${application.dir}/app/"
+  "html-app" : "/app/index.html",
+  "resources" : {
+    "app" : {
+      "type" : "filesystem",
+      "config" : {
+        "directory" : "${application.dir}/app/"
       }
     },
 
-    client: {
-      type: 'aggregating-filesystem',
-      config: {
-        directory: "${io.liveoak.js.dir}"
+    "client" : {
+      "type" : "aggregating-filesystem",
+      "config" : {
+        "directory" : "${io.liveoak.js.dir}"
       }
     },
 
-    storage: {
-      type: 'mongo',
-      config: {
-        db: 'chat-demo',
-        servers: [
+    "storage" : {
+      "type" : "mongo",
+      "config" : {
+        "db" : "chat-demo",
+        "servers" : [
           {
-            host: 'localhost',
-            port: 27017
+            "host" : "localhost",
+            "port" : 27017
           }
         ]
       }
     },
 
-    auth: {
-      type: 'keycloak'
+    "auth" : {
+      "type" : "keycloak"
     },
 
-    authz: {
-      type: 'security',
-      config: {
-        policies: [
+    "authz" : {
+      "type" : "security",
+      "config" : {
+        "policies" : [
           {
-            policyName: "URIPolicy",
-            policyResourceEndpoint: "/chat-html-secured/uri-policy/authzCheck"
+            "policyName" : "URIPolicy",
+            "policyResourceEndpoint" : "/chat-html-secured/uri-policy/authzCheck"
           },
           {
-            policyName: "ACLPolicy",
-            policyResourceEndpoint: "/chat-html-secured/acl-policy/authzCheck",
-            includedResourcePrefixes: [ "/chat-html-secured/storage" ]
+            "policyName" : "ACLPolicy",
+            "policyResourceEndpoint" : "/chat-html-secured/acl-policy/authzCheck",
+            "includedResourcePrefixes" : [ "/chat-html-secured/storage" ]
           }
         ]
       }
     },
 
-    acl-policy: {
-      type: 'acl-policy',
-      config: {
-        autoRules: [
+    "acl-policy" : {
+      "type" : "acl-policy",
+      "config" : {
+        "autoRules" : [
           {
-            resourcePath: "/chat-html-secured/storage/chat",
-            autoAddedOwnerPermissions: [ "DELETE" ]
+            "resourcePath" : "/chat-html-secured/storage/chat",
+            "autoAddedOwnerPermissions" : [ "DELETE" ]
           }
         ]
       }
     },
 
-    uri-policy: {
-      type: 'uri-policy',
-      config: {
-        rules: [
+    "uri-policy" : {
+      "type" : "uri-policy",
+      "config" : {
+        "rules" : [
           {
-            uriPattern: "*",
-            requestTypes: [ "*" ],
-            allowedUsers: [ "*" ]
+            "uriPattern" : "*",
+            "requestTypes" : [ "*" ],
+            "allowedUsers" : [ "*" ]
           },
           {
-            uriPattern: "/chat-html-secured/storage/chat",
-            requestTypes: [ "UPDATE" ],
-            allowedRoles: [ "chat-html-secured/admin" ]
+            "uriPattern" : "/chat-html-secured/storage/chat",
+            "requestTypes" : [ "UPDATE" ],
+            "allowedRoles" : [ "chat-html-secured/admin" ]
           },
           {
-            uriPattern: "/chat-html-secured/storage/chat",
-            requestTypes: [ "CREATE", "READ" ],
-            allowedRoles: [ "chat-html-secured/admin", "chat-html-secured/user" ]
+            "uriPattern" : "/chat-html-secured/storage/chat",
+            "requestTypes" : [ "CREATE", "READ" ],
+            "allowedRoles" : [ "chat-html-secured/admin", "chat-html-secured/user" ]
           },
           {
-            uriPattern: "/chat-html-secured/storage/chat/*",
-            requestTypes: [ "READ" ],
-            allowedRoles: [ "chat-html-secured/user", "chat-html-secured/admin" ]
+            "uriPattern" : "/chat-html-secured/storage/chat/*",
+            "requestTypes" : [ "READ" ],
+            "allowedRoles" : [ "chat-html-secured/user", "chat-html-secured/admin" ]
           },
           {
-            uriPattern: "/chat-html-secured/storage/chat/*",
-            requestTypes: [ "UPDATE", "DELETE" ],
-            allowedRoles: [ "chat-html-secured/admin" ]
+            "uriPattern" : "/chat-html-secured/storage/chat/*",
+            "requestTypes" : [ "UPDATE", "DELETE" ],
+            "allowedRoles" : [ "chat-html-secured/admin" ]
           }
         ]
       }
