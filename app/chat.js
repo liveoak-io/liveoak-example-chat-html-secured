@@ -5,7 +5,7 @@ $( function() {
       host: document.location.hostname,
       port: document.location.port,
       auth: {
-        clientId: 'chat-html-secured-client',
+        clientId: 'liveoak.client.chat-html-secured.chat-html-secured-client',
         realm: 'liveoak-apps'
       }
     }
