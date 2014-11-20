@@ -1,6 +1,6 @@
 {
   "html-app" : "/app/index.html",
-  "example" : true,
+  "example" : "chat-html-secured",
   "resources" : {
     "app" : {
       "type" : "filesystem",
