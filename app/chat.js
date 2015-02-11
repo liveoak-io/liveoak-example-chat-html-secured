@@ -22,11 +22,14 @@ $( function() {
         $('<span class="badge badge-primary pull-left" style="background-color:' + get_color(data.name) + '">').append( data.name[0] ) ).append(
         $('<div class="name-text pull-left">').append(
           $('<div class="name">').append( data.name ) ).append(
-          $('<div class="text">').append( data.text ) ).append(
-          $('<div class="text">').append(
-            $('<button id="delete_' + get_id( data ) + '">' ).click(function() {
-                trigger_remove_message(this.id);
-              }).append ("Delete message") ) ) ) );
+          $('<div class="text">').append( data.text ) ).append( ) ); 
+        $('<div class="text">').append(
+          $('<button id="delete_' + get_id( data ) + '">' ).click(function() {
+              trigger_remove_message(this.id);
+            }).append ("Delete message") 
+          ); 
+      );
+    
     window.scrollTo(0, document.body.scrollHeight);
   }
 
