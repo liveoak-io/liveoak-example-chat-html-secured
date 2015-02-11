@@ -77,24 +77,37 @@ body{
     }
   }
   
-  a.pull-right {
-    color: rgba(255,255,255,0.75);
-    font-size: 20px;
+  #logout {
+    float: right;
     margin-right: 32px;
-    margin-top: 18px;
-    transition: color 0.5s ease, margin 0.5s ease;
+    margin-top: 11px;
+    padding-left: 0;
+    padding-right: 0;
+    transition: margin 0.5s ease;
     
     @media (max-width: 640px) {
       margin-right: 16px; 
     }
-
     
+    &:hover,
+    &:focus {
+      color: white;
+    }
+  }
+  
+  a.pull-right {
+    color: rgba(255,255,255,0.75);
+    font-size: 20px;
+    margin-right: 16px;
+    margin-top: 18px;
+    transition: color 0.5s ease, margin 0.5s ease;
+        
     span {
       display: none;
     }
     
     &:hover {
-      color: #fff;
+      color: white;
     }
   }
 }
@@ -208,6 +221,23 @@ form {
       
       .text {
         color: @gray-secondary;
+      }
+      
+      .btn.delete {
+        float: right;
+        
+        .fa {
+          font-size: 16px;
+          color: @gray-secondary;
+        }
+        
+        &:hover .fa {
+          color: @gray-text;
+        }
+        
+        span {
+          display: none;
+        }
       }
     }
   }

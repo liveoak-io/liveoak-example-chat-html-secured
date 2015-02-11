@@ -6327,23 +6327,35 @@ body {
     margin: 0 16px;
   }
 }
+.navbar #logout {
+  float: right;
+  margin-right: 32px;
+  margin-top: 11px;
+  padding-left: 0;
+  padding-right: 0;
+  transition: margin 0.5s ease;
+}
+@media (max-width: 640px) {
+  .navbar #logout {
+    margin-right: 16px;
+  }
+}
+.navbar #logout:hover,
+.navbar #logout:focus {
+  color: white;
+}
 .navbar a.pull-right {
   color: rgba(255, 255, 255, 0.75);
   font-size: 20px;
-  margin-right: 32px;
+  margin-right: 16px;
   margin-top: 18px;
   transition: color 0.5s ease, margin 0.5s ease;
-}
-@media (max-width: 640px) {
-  .navbar a.pull-right {
-    margin-right: 16px;
-  }
 }
 .navbar a.pull-right span {
   display: none;
 }
 .navbar a.pull-right:hover {
-  color: #fff;
+  color: white;
 }
 .namebar {
   position: fixed;
@@ -6452,6 +6464,19 @@ form {
 }
 .card #messages .message .text {
   color: #727272;
+}
+.card #messages .message .btn.delete {
+  float: right;
+}
+.card #messages .message .btn.delete .fa {
+  font-size: 16px;
+  color: #727272;
+}
+.card #messages .message .btn.delete:hover .fa {
+  color: #212121;
+}
+.card #messages .message .btn.delete span {
+  display: none;
 }
 .card .textbar {
   position: fixed;
