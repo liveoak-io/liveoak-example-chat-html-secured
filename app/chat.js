@@ -23,7 +23,7 @@ $( function() {
         $('<div class="name-text pull-left">').append(
           $('<div class="name">').append( data.name ) ).append(
           $('<div class="text">').append( data.text ) ) ).append(
-        $('<button class="btn btn-link btn-icon" id="delete_' + get_id( data ) + '">' ).click(function() {
+        $('<button class="btn btn-link btn-icon delete" id="delete_' + get_id( data ) + '">' ).click(function() {
             trigger_remove_message(this.id);
           }).append(
             $('<i class="fa fa-trash-o"></i>')

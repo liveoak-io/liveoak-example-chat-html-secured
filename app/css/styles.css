@@ -6439,6 +6439,7 @@ form {
 .card #messages {
   padding: 16px 16px 80px;
   margin-top: 106px;
+  width: 100%;
 }
 .card #messages .message {
   margin-bottom: 16px;
@@ -6457,7 +6458,7 @@ form {
   color: rgba(255, 255, 255, 0.9);
 }
 .card #messages .message .name-text {
-  max-width: calc(100% - 56px);
+  max-width: calc(100% - 96px);
 }
 .card #messages .message .name {
   font-weight: 700;
