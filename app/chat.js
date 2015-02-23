@@ -5,11 +5,13 @@ $( function() {
       host: document.location.hostname,
       port: document.location.port,
       auth: {
-        clientId: 'liveoak.client.chat-html-secured.chat-html-secured-client',
+        appClientId: 'chat-html-secured-client',
         realm: 'liveoak-apps'
       }
     }
   );
+
+  var app = liveoak.app();
 
   liveoak.auth.init({ onLoad: 'login-required' }).success(authCallback).error(function(data) {
     alert( "authentication failed: " + data.error );
@@ -49,7 +51,7 @@ $( function() {
 
   function trigger_remove_message(msgId) {
     var id = msgId.substring(msgId.indexOf("_") + 1);
-    liveoak.remove( '/chat-html-secured/storage/chat', { id: 'ObjectId("' + id + '")'}, {
+    app.remove( '/storage/chat', { id: 'ObjectId("' + id + '")'}, {
       success: function(data) {
         console.log("Message deleted: " + data.id );
       },
@@ -101,8 +103,8 @@ $( function() {
     $( '.namebar' ).html( '<span id="name-field">Logged in as: ' + liveoak.auth.idToken.preferred_username + '</span>' );
     liveoak.connect( "Bearer", liveoak.auth.token, function() {
       // If admin is logged, we will try to create chat collection
-      if (liveoak.auth.hasResourceRole('admin', 'chat-html-secured')) {
-        liveoak.create('/chat-html-secured/storage', { id: 'chat' }, {
+      if (liveoak.auth.hasResourceRole('admin', app.applicationId)) {
+        liveoak.create('/storage', { id: 'chat' }, {
           success: function (data) {
             console.log("Chat collection successfully created")
           },
@@ -118,7 +120,7 @@ $( function() {
         alert("Stomp error received. Details: " + frame);
       });
 
-      liveoak.subscribe( '/chat-html-secured/storage/chat/*', function(data, action) {
+      app.subscribe( '/storage/chat/*', function(data, action) {
         if (action == 'create') {
           add_message( data );
         } else if (action == 'update') {
@@ -128,7 +130,7 @@ $( function() {
         }
       });
 
-      liveoak.read( '/chat-html-secured/storage/chat?fields=*(*)', {
+      app.read( '/storage/chat?fields=*(*)', {
         success: function(data) {
           $(data.members).each( function(i, e) {
             add_message( e );
@@ -158,7 +160,7 @@ $( function() {
 
     $('#text-field').val( '' );
 
-    liveoak.create( '/chat-html-secured/storage/chat',
+    app.create( '/storage/chat',
                     { name: name, text: text },
                     { success: function(data) {
                         console.log( "sent" );
