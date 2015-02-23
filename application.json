@@ -1,6 +1,8 @@
 {
   "html-app" : "/app/index.html",
   "example" : "chat-html-secured",
+  "name" : "${application.id}",
+  "configuration-files" : ["app/index.html"],
   "resources" : {
     "app" : {
       "type" : "filesystem",
@@ -19,7 +21,7 @@
     "storage" : {
       "type" : "mongo",
       "config" : {
-        "db" : "chat-demo"
+        "db" : "${application.id}"
       }
     },
 
@@ -33,12 +35,12 @@
         "policies" : [
           {
             "policyName" : "URIPolicy",
-            "policyResourceEndpoint" : "/chat-html-secured/uri-policy/authzCheck"
+            "policyResourceEndpoint" : "/${application.id}/uri-policy/authzCheck"
           },
           {
             "policyName" : "ACLPolicy",
-            "policyResourceEndpoint" : "/chat-html-secured/acl-policy/authzCheck",
-            "includedResourcePrefixes" : [ "/chat-html-secured/storage" ]
+            "policyResourceEndpoint" : "/${application.id}/acl-policy/authzCheck",
+            "includedResourcePrefixes" : [ "/${application.id}/storage" ]
           }
         ]
       }
@@ -49,7 +51,7 @@
       "config" : {
         "autoRules" : [
           {
-            "resourcePath" : "/chat-html-secured/storage/chat",
+            "resourcePath" : "/${application.id}/storage/chat",
             "autoAddedOwnerPermissions" : [ "DELETE" ]
           }
         ]
@@ -66,24 +68,24 @@
             "allowedUsers" : [ "*" ]
           },
           {
-            "uriPattern" : "/chat-html-secured/storage/chat",
+            "uriPattern" : "/${application.id}/storage/chat",
             "requestTypes" : [ "UPDATE" ],
-            "allowedRoles" : [ "chat-html-secured/admin" ]
+            "allowedRoles" : [ "${application.id}/admin" ]
           },
           {
-            "uriPattern" : "/chat-html-secured/storage/chat",
+            "uriPattern" : "/${application.id}/storage/chat",
             "requestTypes" : [ "CREATE", "READ" ],
-            "allowedRoles" : [ "chat-html-secured/admin", "chat-html-secured/user" ]
+            "allowedRoles" : [ "${application.id}/admin", "${application.id}/user" ]
           },
           {
-            "uriPattern" : "/chat-html-secured/storage/chat/*",
+            "uriPattern" : "/${application.id}/storage/chat/*",
             "requestTypes" : [ "READ" ],
-            "allowedRoles" : [ "chat-html-secured/user", "chat-html-secured/admin" ]
+            "allowedRoles" : [ "${application.id}/user", "${application.id}/admin" ]
           },
           {
-            "uriPattern" : "/chat-html-secured/storage/chat/*",
+            "uriPattern" : "/${application.id}/storage/chat/*",
             "requestTypes" : [ "UPDATE", "DELETE" ],
-            "allowedRoles" : [ "chat-html-secured/admin" ]
+            "allowedRoles" : [ "${application.id}/admin" ]
           }
         ]
       }
