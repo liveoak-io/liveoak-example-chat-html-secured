@@ -1,0 +1,16 @@
+[
+  {
+    "id" : "chat-html-secured-client",
+    "type" : "html5",
+    "redirect-uris" : [
+      "http://localhost:8080/${application.id}/*"
+    ],
+    "web-origins" : [
+      "http://localhost:8080"
+    ],
+    "app-roles" : [
+      "user",
+      "admin"
+    ]
+  }
+]

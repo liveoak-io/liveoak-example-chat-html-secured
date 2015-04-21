@@ -18,6 +18,10 @@
       }
     },
 
+    "application-clients" : {
+      "type" : "application-clients"
+    },
+
     "storage" : {
       "type" : "mongo",
       "config" : {
