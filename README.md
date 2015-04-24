@@ -35,22 +35,6 @@ $ sh $LIVEOAK/bin/standalone.sh
 Setup the application
 ---------------------
 
-* Create roles for your application (Manual step required).
-  * Go to [http://localhost:8080/admin](http://localhost:8080/admin) and login as user "admin" with password "admin".
-  * Go to [http://localhost:8080/admin#/applications/chat-html-secured/security/roles](http://localhost:8080/admin#/applications/chat-html-secured/security/roles) and add 2 new roles "admin" and "user". Then you can also select "user" to be the default role.
-  * Role names are important, because authorization is configured to deal with those 2 roles.
-
-* Add HTML client for newly created application (Manual step currently required)
-
-  * Go to [http://localhost:8080/admin#/applications/chat-html-secured/application-clients](http://localhost:8080/admin#/applications/chat-html-secured/application-clients)
-  * Add Client
-    * Name: "chat-html-secured-client"
-    * Platform: HTML5
-    * Redirect URI: "http://localhost:8080/chat-html-secured/*"
-    * Web Origins: "http://localhost:8080"
-    * Scope: select both "admin" and "user" scopes
-    * Finally click "Save"
-
 * Create some default users for testing purposes (their names and default passwords are not important, feel free to use different names). This step is not mandatory as you can automatically register users later on the login screen of the application.
 But it's useful as self-registered users always have just default roles (in our case role "user"), so you can't test all the authorization possibilities when all users have just same role "user" .
   * Go to http://localhost:8080/admin#/applications/chat-html-secured/security/users
