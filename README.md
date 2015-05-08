@@ -35,6 +35,12 @@ $ sh $LIVEOAK/bin/standalone.sh
 Setup the application
 ---------------------
 
+> An Application Client was created upon installation of the application. Note that the redirect and web origin
+> urls are set to 'http://localhost:8080'. If LiveOak is installed at something other than 'http://localhost:8080',
+> then it will need to be edited within the Admin Console.
+
+> When installed on OpenShift, be sure to change 'http' to 'https' for the urls mentioned above.
+
 * Create some default users for testing purposes (their names and default passwords are not important, feel free to use different names). This step is not mandatory as you can automatically register users later on the login screen of the application.
 But it's useful as self-registered users always have just default roles (in our case role "user"), so you can't test all the authorization possibilities when all users have just same role "user" .
   * Go to http://localhost:8080/admin#/applications/chat-html-secured/security/users
